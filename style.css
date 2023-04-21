@@ -52,7 +52,7 @@ body {
 }
 
 /* ------ GAME OVER ------- */
-#gameOver {
+#gameOver, #Win {
     display: none;
     text-align: center;
     font-size: 4em;

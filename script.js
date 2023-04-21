@@ -2,6 +2,7 @@ const wordContainer = document.getElementById('wordContainer');
 const startButton = document.getElementById('startButton');
 const usedLettersElement = document.getElementById('usedLetters');
 const gameOver = document.getElementById('gameOver');
+const Win = document.getElementById('Win');
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
@@ -22,12 +23,11 @@ let hits;
 
 
 const endGame = () => {
-    gameOver.style.display = 'block';
     document.removeEventListener('keydown', letterEvent);
     startButton.style.display = 'block';
 }
 
-//dibuja las partes del cuerpo
+//dibuja las extremidades
 const addExtremities = bodyPart => {
     ctx.fillStyle = '#000000';
     ctx.fillRect(...bodyPart);
@@ -42,7 +42,10 @@ const addBody = bodyPart => {
 const wrongLetter = () => {
     mistakes < 2 ? addBody(bodyParts[mistakes]) : addExtremities(bodyParts[mistakes]);
     mistakes++;
-    if(mistakes === bodyParts.length) endGame();
+    if(mistakes === bodyParts.length) {
+        endGame();
+        gameOver.style.display = 'block';
+    }
 }
 
 //visiviliza la letra acertada
@@ -54,7 +57,10 @@ const correctLetter = letter => {
             hits++;
         }
     }
-    if(hits === selectedWord.length) endGame();
+    if(hits === selectedWord.length) {
+        endGame();
+        Win.style.display = 'block';
+    }
 }
 
 //comprueba si la letra esta en la palabra
@@ -118,6 +124,8 @@ const startGame = () => {
     usedLetters = [];
     mistakes = 0;
     hits = 0;
+    gameOver.style.display = 'none';
+    Win.style.display = 'none';
     wordContainer.innerHTML = '';
     usedLettersElement.innerHTML = '';
     drawGallows();
