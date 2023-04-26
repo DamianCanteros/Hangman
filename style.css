@@ -6,14 +6,26 @@
 }
 
 body {
-    background-color: #4a4063;
-    color: #fff;
-    font-family: 'SF Pixelate', sans-serif;
+    background-color: hsl(262, 27%, 31%);
+    color: hsl(0, 0%, 100%);
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px 21px;
+    border-radius:5px;
+    border: none;
+    background-color: hsl(172, 100%, 93%);
+    box-shadow: 0px 7px 0px 3px hsl(0, 0%, 13%), -5px -5px 15px 3px rgba(255, 255, 255, 0.2);
+  }
 
 #wordContainer {
     margin-top: 20px;
@@ -32,42 +44,68 @@ body {
     left: 0;
     width: 100%;
     height: 1px;
-    background-color: #fff;
+    background-color: hsl(0, 0%, 93%);
     min-width: 12px;
 }
 
 #startButton {
     margin-top: 20px;
     appearance: none;
-    font-family: 'SF Pixelate', sans-serif;
     border: none;
     width: 300px;
     padding: 10px;
-    background: #d95d39;
-    color: #fff;
+    background: hsl(19, 69%, 49%);
+    color: hsl(0, 0%, 93%);
     font-weight: 600;
     font-size: 20px;
     border-radius: 4px;
     cursor: pointer;
 }
 
-/* ------ GAME OVER ------- */
-#gameOver, #Win {
+/* ------ SIGN GAME START AND OVER ------- */
+#signStart, #signOver {
     display: none;
     text-align: center;
-    font-size: 4em;
+    font-size: 2em;
     font-weight: bold;
-}
-
-.animation {
-    position: fixed;
-    top: 40%;
+    position: absolute;
+    top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.1);
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+  
+  #signStart {
+    display: block;
+  }
+  
+  #signStart p, #signOver p{
+    font-size: 22px;
+    opacity: 0; /* el elemento está oculto por defecto */
+    animation: aparecer-desaparecer 1s infinite; /* la animación dura 1 segundo y se repite infinitamente */
+  }
+  
+  @keyframes aparecer-desaparecer {
+    0% {
+      opacity: 0; /* el elemento está completamente oculto al principio */
+    }
+    50% {
+      opacity: 1; /* el elemento aparece a la mitad de la animación */
+    }
+    100% {
+      opacity: 0; /* el elemento desaparece al final de la animación */
+    }
+  }
+  
+  .animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: grow 1s ease-in-out forwards;
-}
-
-@keyframes grow {
+  }
+  
+  @keyframes grow {
     0% {
     transform: translate(-50%, -50%) scale(0.1);
     }
@@ -77,4 +115,5 @@ body {
     100% {
     transform: translate(-50%, -50%) scale(0.8);
     }
-}
+  }    
+  

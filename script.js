@@ -1,9 +1,8 @@
 const wordContainer = document.getElementById('wordContainer');
 const startButton = document.getElementById('startButton');
 const usedLettersElement = document.getElementById('usedLetters');
-const gameOver = document.getElementById('gameOver');
-const Win = document.getElementById('Win');
-
+const gameOver = document.getElementById('signOver');
+const signStart = document.getElementById('signStart');
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 
@@ -29,7 +28,7 @@ const endGame = () => {
 
 //dibuja las extremidades
 const addExtremities = bodyPart => {
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = 'hsl(0, 0%, 93%)';
     ctx.fillRect(...bodyPart);
 };
 
@@ -44,6 +43,7 @@ const wrongLetter = () => {
     mistakes++;
     if(mistakes === bodyParts.length) {
         endGame();
+        gameOver.textContent = 'Game Over';
         gameOver.style.display = 'block';
     }
 }
@@ -59,7 +59,8 @@ const correctLetter = letter => {
     }
     if(hits === selectedWord.length) {
         endGame();
-        Win.style.display = 'block';
+        gameOver.textContent = 'You Win';
+        gameOver.style.display = 'block';
     }
 }
 
@@ -112,7 +113,7 @@ const drawGallows = () => {
     ctx.canvas.height = 260;
     ctx.scale(20, 20);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#d95d39';
+    ctx.fillStyle = 'hsl(19, 69%, 49%)';
     ctx.fillRect(0, 12, 6, 1);
     ctx.fillRect(1, 0, 1, 12);
     ctx.fillRect(2, 0, 7, 1);
@@ -121,11 +122,11 @@ const drawGallows = () => {
 
 //inicia el juego
 const startGame = () => {
+    signStart.style.display = 'none';
     usedLetters = [];
     mistakes = 0;
     hits = 0;
     gameOver.style.display = 'none';
-    Win.style.display = 'none';
     wordContainer.innerHTML = '';
     usedLettersElement.innerHTML = '';
     drawGallows();
@@ -134,4 +135,5 @@ const startGame = () => {
     document.addEventListener('keydown', letterEvent);
 };
 
+document.addEventListener('DOMContentLoaded', drawGallows);
 startButton.addEventListener('click', startGame);
