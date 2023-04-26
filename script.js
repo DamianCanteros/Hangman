@@ -120,7 +120,17 @@ const drawGallows = () => {
     ctx.fillRect(8, 1, 1, 1);
 };
 
-//inicia el juego
+// muestra el teclado en dispositivos móviles
+const showKeyboard = () => {
+    const inputElement = document.createElement('input');
+    inputElement.type = 'text';
+    inputElement.style.position = 'absolute';
+    inputElement.style.opacity = '0';
+    document.body.appendChild(inputElement);
+    inputElement.focus();
+};
+
+// inicia el juego
 const startGame = () => {
     signStart.style.display = 'none';
     usedLetters = [];
@@ -133,8 +143,8 @@ const startGame = () => {
     selectRandomWord();
     drawWord();
     document.addEventListener('keydown', letterEvent);
+    showKeyboard(); // muestra el teclado en dispositivos móviles
 };
 
 document.addEventListener('DOMContentLoaded', drawGallows);
 startButton.addEventListener('click', startGame);
-startButton.focus();
