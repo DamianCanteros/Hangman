@@ -5,6 +5,7 @@ const gameOver = document.getElementById('signOver');
 const signStart = document.getElementById('signStart');
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
+let hiddenInput = document.getElementById('hiddenInput');
 
 const bodyParts = [
     [8,2,1,1],
