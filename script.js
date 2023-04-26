@@ -85,7 +85,7 @@ const addLetter = letter => {
 
 //carga la letra ingresada si no esta repetida
 const letterEvent = event => {
-    let newLetter = event.key.toUpperCase();
+    let newLetter = String.fromCharCode(event.keyCode).toUpperCase();
     if(!usedLetters.includes(newLetter)) {
         letterInput(newLetter);
     };
