@@ -28,7 +28,7 @@ const endGame = () => {
 
 //dibuja las extremidades
 const addExtremities = bodyPart => {
-    ctx.fillStyle = 'hsl(0, 0%, 93%)';
+    ctx.fillStyle = 'hsl(0, 0%, 0%)';
     ctx.fillRect(...bodyPart);
 };
 
