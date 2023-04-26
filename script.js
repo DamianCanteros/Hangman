@@ -137,3 +137,4 @@ const startGame = () => {
 
 document.addEventListener('DOMContentLoaded', drawGallows);
 startButton.addEventListener('click', startGame);
+startButton.setAttribute('autofocus', true);
