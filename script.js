@@ -24,7 +24,7 @@ let hits;
 
 const endGame = () => {
     document.removeEventListener('keydown', letterEvent);
-    hiddenInput.removeEventListener('input', mobileLetterEvent);
+    document.removeEventListener('input', letterEvent);
     startButton.style.display = 'block';
 }
 
@@ -86,7 +86,7 @@ const addLetter = letter => {
 
 //carga la letra ingresada si no esta repetida
 const letterEvent = event => {
-    let newLetter = String.fromCharCode(event.keyCode).toUpperCase();
+    let newLetter = event.key.toUpperCase();
     if(!usedLetters.includes(newLetter)) {
         letterInput(newLetter);
     };
@@ -144,23 +144,8 @@ const startGame = () => {
     drawGallows();
     selectRandomWord();
     drawWord();
-    // agregamos el event listener para el botón Start
-    startButton.addEventListener('click', () => {
-        document.addEventListener('keydown', letterEvent);
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            // si el usuario está en un dispositivo móvil, mostramos el teclado virtual
-            showKeyboard();
-        }
-    });
-
-    // agregamos el event listener para la entrada de texto oculta
-    hiddenInput.addEventListener('input', (event) => {
-        let newLetter = event.target.value.charAt(event.target.value.length - 1).toUpperCase();
-        if (newLetter && !usedLetters.includes(newLetter)) {
-            letterInput(newLetter);
-        }
-        event.target.value = '';
-    });
+    document.addEventListener('keydown', letterEvent);
+    showKeyboard(); // muestra el teclado en dispositivos móviles
 };
 
 document.addEventListener('DOMContentLoaded', drawGallows);
