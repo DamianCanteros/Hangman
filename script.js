@@ -24,6 +24,7 @@ let hits;
 
 const endGame = () => {
     document.removeEventListener('keydown', letterEvent);
+    hiddenInput.removeEventListener('input', mobileLetterEvent);
     startButton.style.display = 'block';
 }
 
@@ -143,8 +144,23 @@ const startGame = () => {
     drawGallows();
     selectRandomWord();
     drawWord();
-    document.addEventListener('keydown', letterEvent);
-    showKeyboard(); // muestra el teclado en dispositivos móviles
+    // agregamos el event listener para el botón Start
+    startButton.addEventListener('click', () => {
+        document.addEventListener('keydown', letterEvent);
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // si el usuario está en un dispositivo móvil, mostramos el teclado virtual
+            showKeyboard();
+        }
+    });
+
+    // agregamos el event listener para la entrada de texto oculta
+    hiddenInput.addEventListener('input', (event) => {
+        let newLetter = event.target.value.charAt(event.target.value.length - 1).toUpperCase();
+        if (newLetter && !usedLetters.includes(newLetter)) {
+            letterInput(newLetter);
+        }
+        event.target.value = '';
+    });
 };
 
 document.addEventListener('DOMContentLoaded', drawGallows);
